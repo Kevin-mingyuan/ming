@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>网站信息</title>  
+    <link rel='stylesheet' href='/stylesheets/pintuer.css' />
+    <link rel='stylesheet' href='/stylesheets/admin.css' />    
+    <script src="/javascripts/jquery.js"></script>
+    <style>
+        #wrap{
+          width: 100%;
+          height: 100%;
+          background: black;
+          position: fixed;
+          opacity: .7;
+          top:0;
+          bottom: 0;
+          display: none;
+          z-index: 9999999;
+        }
+        #menu{
+          width: 300px;
+          height: 300px;
+          position: fixed;
+          margin: auto;
+          top:0;
+          right: 0;
+          bottom:0;
+          left:0;
+          border: 1px solid #eee;
+          background: #ccc;
+          display: none;
+          cursor: pointer;
+          text-align: center; 
+        }
+        #menu input{
+          width: 280px;
+          height: 30px;
+          margin-bottom:15px;
+        }
+        #con{
+          position: relative;
+        }
+        #con span{
+          position: absolute;
+          right: 5px;
+          top: 5px;
+          font-size: 16px;
+          color: red;
+          cursor: pointer;
+        }
+        #add{
+          cursor: pointer;
+        }
+
+        #wrap2{
+          width: 100%;
+          height: 100%;
+          background: black;
+          position: fixed;
+          opacity: .7;
+          top:0;
+          bottom: 0;
+          display: none;
+          z-index: 9999999;
+        }
+        #menu2{
+          width: 300px;
+          height: 300px;
+          position: fixed;
+          margin: auto;
+          top:0;
+          right: 0;
+          bottom:0;
+          left:0;
+          border: 1px solid #eee;
+          background: #ccc;
+          display: none;
+          cursor: pointer;
+          text-align: center; 
+        }
+        #menu2 input{
+          width: 280px;
+          height: 30px;
+          margin-bottom:15px;
+        }
+        #con2{
+          position: relative;
+        }
+        #con2 span{
+          position: absolute;
+          right: 5px;
+          top: 5px;
+          font-size: 16px;
+          color: red;
+          cursor: pointer;
+        }
+        #add2{
+          cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="panel admin-panel">
+  <div class="panel-head"><strong class="icon-reorder"> 内容列表</strong></div>
+  <div class="padding border-bottom">  
+  <a class="button border-yellow" id='add'>
+    <span class="icon-plus-square-o"></span> 添加内容
+  </a>
+  <input type="text" class="button border-blue"  placeholder="请输入查询的名称或内容" id='search' />
+  <button id='sea_btn' class="button border-green" >查询</button>
+  </div> 
+  <!-- add -->
+  <div id='wrap'>
+      <div id="menu">
+          <div id='con'>
+              <span id='close'>X</span>
+              <p>栏目名称</p>
+              <input type="text" id="name_con" placeholder="请输入栏目名称">
+              <p>简介内容</p>
+              <input type="text" id="content" placeholder="请输入内容">
+              <a class="button border-green" id='addcon' href="/column">
+                    添加内容
+              </a>
+          </div>
+      </div>
+  </div>
+  <!-- update -->
+  <div id='wrap2'>
+    <div id="menu2">
+        <div id='con2'>
+            <span id='close2'>X</span>
+            <p>栏目名称</p>
+            <input type="text" id="name_con2" placeholder="请输入栏目名称">
+            <p>简介内容</p>
+            <input type="text" id="content2" placeholder="请输入内容">
+            <button class="button border-green" id='addcon2' >
+                  确认完成
+            </button>
+        </div>
+    </div>
+</div>
+  <table class="table table-hover text-center" id="table">
+    <tr>
+      <th width="5%">num</th>     
+      <th>栏目名称</th>  
+      <th>简介内容</th>     
+      <th width="250">操作</th>
+    </tr>
+   
+    <% data.map(function(item,i){ %>
+      <tr data-id='<%-item._id%>'> 
+          <td><%-i+1 %></td>
+          <td><%-item.name_con %></td>
+          <td><%-item.content %></td>
+          <td>
+              <div class="button-group">
+              <a type="button" class="button border-main update"  style="cursor:pointer">
+                <span class="icon-edit"></span>修改</a>
+               <a class="button border-red del" style="cursor:pointer" >
+                <span class="icon-trash-o"></span> 删除</a>
+              </div>
+          </td>
+      </tr>
+    <% }) %>
+  </table>
+      <div class="pagelist"> 
+        <a href="/column?pageNo=<%-pageNo<=1?1:parseInt(pageNo)-1%>">上一页</a> 
+        <% if(page>4){%>
+          <a class="current" href="/column?pageNo=1">1</a>
+          <a href="/column?pageNo=2">2</a>
+          <a href="#">...</a>
+          <a href="/column?pageNo=<%-page -1%>"><%-page-1%></a>
+          <a href="/column?pageNo=<%-page%>"><%-page%></a>
+        <% }else{ %>
+          <% for(let i=0; i<page;i++){ %>
+              <a href="/column?pageNo=<%-i+1 %>"><%-i+1 %></a>     
+          <% } %>
+        <% } %>
+        <a href="/column?pageNo=<%-pageNo>=page?page:parseInt(pageNo)+1%>" id='next' >下一页</a> 
+        <a href="/column?pageNo=<%-page%>">尾页</a>
+    </div>
+ 
+</div>
+<script>
+    $('#add').click(function(){
+        $('#wrap').css('display','block');
+        $('#menu').css('display','block');
+        $('#con').css('display','block');
+    });
+    $('#addcon').click(function(){
+      $('#wrap').css('display','none');
+        $('#menu').css('display','none');
+        console.log({name_con:$('#name_con').val(),content:$('#content').val()});
+        $.ajax({
+            type:'post',
+            url:'/users/column',
+            data:{name_con:$('#name_con').val(),content:$('#content').val()},
+            success:function(data){
+                if(data==1){
+                  alert('添加成功,又多了一行,啦啦啦');
+                }
+            }
+        })
+    })
+    $('#close').click(function(){
+      $('#wrap').css('display','none');
+        $('#menu').css('display','none');
+    });
+
+    // del
+    $('#table').on('click','.del',function(){
+        let id = $(this).parent().parent().parent().attr('data-id');
+        let _this = this;
+        $.ajax({
+            type:'post',
+            url:'/users/columnDel',
+            data:{id:id},
+            success:function(data){
+                if(data==1){
+                  alert('删除成功,贼开心');
+                    $(_this).parent().parent().parent().remove();
+                }
+            }
+        })
+    })
+
+
+      $('#table').on('click','.update',function(){
+          $('#wrap2').css('display','block');
+          $('#menu2').css('display','block');
+          $('#con2').css('display','block');
+          let id = $(this).parent().parent().parent().attr('data-id');
+          let _this = this;
+
+          $('#addcon2').click(function(){
+              $('#wrap').css('display','none');
+              $('#menu').css('display','none');
+              
+              
+            console.log(id);
+            console.log({name_con:$('#name_con2').val(),content:$('#content2').val()});
+            $.ajax({
+                type:'post',
+                url:'/users/columnUpdate',
+                data:{id:id,name_con:$('#name_con2').val(),content:$('#content2').val()},
+                success:function(data){
+                    console.log(data);
+                    if(data==1){
+                      alert('修改成功');
+                      var  _body = window.parent;
+                      var _iframe1 = _body.document.getElementById('ifrmid');
+                      _iframe1.contentWindow.location.reload(true);
+                    }
+                }
+            })
+        })
+
+    });
+
+    // update id 问题
+     $('#close2').click(function(){
+      $('#wrap2').css('display','none');
+        $('#menu2').css('display','none');
+    });
+
+    // find
+    $('#sea_btn').click(function(){
+        var str = $('#search').val();
+        var  _body = window.parent;
+        var _iframe1 = _body.document.getElementById('ifrmid');
+        _iframe1.src = '/column?s='+str;
+        
+        $('#next').click(function(){
+      var  _body = window.parent;
+      var _iframe1 = _body.document.getElementById('ifrmid');
+        let a =_iframe1.src+""; 
+        let b=a.split('=').slice(1)+"";
+        console.log(b); 
+        var a = _iframe1.src = '/column?s=test';
+        console.log(a);
+    })
+    })
+    
+</script>
+</body>
+</html>

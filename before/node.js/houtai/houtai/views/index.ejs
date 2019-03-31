@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <meta charset=utf-8 />
+    <link rel='stylesheet' href='/stylesheets/pintuer.css' />
+    <link rel='stylesheet' href='/stylesheets/admin.css' />    
+    <script src="/javascripts/jquery.js"></script>
+  </head>
+  <body style="background-color:#f2f9fd;">
+    <div class="header bg-main">
+      <div class="logo margin-big-left fadein-top">
+        <h1><img src="images/y.jpg" class="radius-circle rotate-hover" height="50" alt="" />后台管理中心</h1>
+      </div>
+      <div class="head-l">
+          <a class="button button-little bg-green" href="" target="_blank">
+              <span class="icon-home"></span> 前台首页
+          </a> &nbsp;&nbsp;
+          <% if(name){ %>
+            
+            <a class="button button-little bg-red" href="/relogin">
+              <span class="icon-power-off"></span> 退出登录
+            </a> 
+            <span style="color:white;font-size:20px;" id='back' >欢迎回来：<%-name%></span>
+          <% }else{%>
+              <a class="button button-little bg-green" href="/register" target="_blank">
+              <span class="icon-home"></span> 
+                注册用户
+              </a> &nbsp;&nbsp;
+    
+              <a href="/login" class="button button-little bg-blue">
+                <span class="icon-home"></span> 登录用户
+              </a> &nbsp;&nbsp;
+          <% } %>
+
+        </div>
+    </div>
+    <div class="leftnav">
+      <div class="leftnav-title"><strong><span class="icon-list"></span>菜单列表</strong></div>
+      <h2><span class="icon-user"></span>基本设置</h2>
+      <ul style="display:block">
+        <li><a href="/info" target="right" id='config'><span class="icon-caret-right"></span>网站设置</a></li>
+        <li><a href="/pass" target="right" id='password'><span class="icon-caret-right"></span>修改密码</a></li>
+        <li><a href="/page" target="right" id='page'><span class="icon-caret-right"></span>单页管理</a></li>  
+        <!-- <li><a href="/book" target="right"><span class="icon-caret-right"></span>留言管理</a></li>      -->
+        <li><a href="/column" target="right" id="lanmu" ><span class="icon-caret-right"></span>栏目管理</a></li>
+      </ul>   
+      <h2><span class="icon-pencil-square-o"></span>栏目管理</h2>
+      <ul>
+        
+      </ul>  
+    </div>
+    <script type="text/javascript">
+    $(function(){
+      $(".leftnav h2").click(function(){
+        $(this).next().slideToggle(200);	
+        $(this).toggleClass("on"); 
+      })
+      $(".leftnav ul li a").click(function(){
+          $("#a_leader_txt").text($(this).text());
+          let src= JSON.stringify($("#a_leader_txt").text($(this).text()));
+          $("#a_leader_txt").attr('href','/'+src);
+          $(".leftnav ul li a").removeClass("on");
+        $(this).addClass("on");
+      });
+      // 判断name登录
+      console.log($('#back').html())
+      if($('#back').html() == undefined){
+        $('#lanmu').attr({'href':'/alert'});
+        $('#config').attr({'href':'/alert'});
+        $('#password').attr({'href':'/alert'});
+        $('#page').attr({'href':'/alert'});
+      }else{ 
+        $('#lanmu').attr({'href':'/column'});
+        $('#config').attr({'href':'/info'});
+        $('#password').attr({'href':'/pass'});
+        $('#page').attr({'href':'/page'});
+      }
+    });
+
+    </script>
+    <ul class="bread">
+      <li><a href="{:U('Index/info')}" target="right" class="icon-home"> 首页</a></li>
+      <li><a id="a_leader_txt">网站信息</a></li>
+      <li><b>当前语言：</b><span style="color:red;">中文</php></span>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;切换语言：<a href="##">中文</a> 
+      &nbsp;&nbsp;<a href="##">中文</a> </li>
+    </ul>
+    <div class="admin">
+      <iframe scrolling="auto" id="ifrmid" rameborder="0" src="/info" name="right" width="100%" height="100%"></iframe>
+    </div>
+    <div style="text-align:center;">
+    </div>
+    </body>
+</html>

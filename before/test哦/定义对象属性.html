@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+	</head>
+	<body>
+		
+	</body>
+	<script type="text/javascript">
+		// 定义一个对象属性
+		var o={};//创建一个新对象
+		Object.defineProperty(o,"a",{
+			//该属性对应的值。可以是任何有效的 JavaScript 值（数值，对象，函数等）。默认为 undefined
+			value:37,
+			// 仅当仅当该属性的writable为 true 时，该属性才能被赋值运算符改变。默认为 false
+			writable:true,
+			//仅当该属性的 enumerable 为 true 时，该属性才能够出现在对象的枚举属性中。默认为 false
+			enumerable:true,
+			// 仅当该属性的 configurable 为 true 时，该属性才能够被改变，也能够被删除。默认为 false
+			configurable:true
+		});
+		// 对象o拥有了属性a，值为37
+		console.log(o);
+		// console.log(1);
+		
+		var bValue;
+		Object.defineProperty(o,"b",{
+			get:function () { return bValue; },
+			set:function (v) { bValue=v; },
+			enumerable:true,  //可枚举可以遍历 有length
+			configurable:true
+		});
+		o.b=45;  //定义b为45
+		console.log(o);
+	</script>
+</html>

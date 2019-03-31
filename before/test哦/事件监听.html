@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		<style>
+			p{
+  background-color: gray;
+  }
+  h1{
+  background-color: blue;
+  }
+  span{
+  background-color: red;
+  }
+  </style>
+	</head>
+	<body>
+		<div>
+			<p>我是<span>p</span></p>
+			<h1>我是<span>h1</span></h1>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var div = document.querySelector('div')
+		div.addEventListener('click', function(e) {
+			var t = e.target
+			while (t.tagName !== 'H1') {
+				if (t === div) {
+					t = null //这句代码思考了好久，可以针对这个例子简单的说，如果点击的是p就会继续往上找，如
+					// 果找到了 div那就证明找完了， 不需要往上再找了， 所以把t等于null。
+					break;
+				}
+				t = t.parentNode
+			}
+			if (t !== null) {
+				console.log('H1！')
+			} else {
+				console.log('error')
+			}
+		})
+	</script>
+</html>

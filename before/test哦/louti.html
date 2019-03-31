@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			.content{
+				width: 500px;
+				height: 500px;
+				line-height: 500px;
+				text-align: center;
+				border: 1px solid red;
+			}
+			ul{
+				position: fixed;
+				list-style: none;
+				width: 500px;
+				clear: both;
+				height: 40px;
+				top: 0;
+				left: 0;
+				border: 1px solid blue;
+			}
+			li{
+				float: left;
+				width: 80px;
+				height: 40px;
+				line-height: 40px;
+				text-align: center;
+				cursor: pointer;
+				border-right: 1px solid royalblue;
+			}
+			.active{
+				color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<ul>
+			<li class="active">一楼女装</li>
+			<li>二楼男装</li>
+			<li>三楼童装</li>
+			<li>四楼美妆</li>
+			<li>五楼家店</li>
+		</ul>
+		<div class="content" style="padding-top: 40px;">一楼女装</div>
+		<div class="content">二楼男装</div>
+		<div class="content">三楼童装</div>
+		<div class="content">四楼美妆</div>
+		<div class="content">五楼家店</div>
+	</body>
+	<script type="text/javascript">
+		
+		var ul = document.getElementsByTagName("ul")[0];
+		var lis = ul.getElementsByTagName("li");
+		var contents = document.getElementsByClassName("content");
+		var floors = [];
+		var activeNum = 0;
+		var to = 0
+//		var con = contents[0].offsetHeight;
+		
+		for (var i = 0; i < contents.length; i++) {
+			to = contents[i].offsetHeight + to;
+			floors.push(to);
+			console.log(to);
+		}
+		
+		for (var i = 0; i < lis.length; i++) {
+			!function (i){
+				lis[i].onclick = function (){
+					lis[activeNum].className = "";
+					lis[i].className = "active";
+					activeNum = i;
+//					document.body.scrollTop = floors[i] - 542 ;
+					document.body.scrollTop = floors[i] - contents[0].offsetHeight ;
+					console.log(floors[i] - contents[0].offsetHeight);
+				}
+			}(i)
+		}
+		
+	</script>
+</html>

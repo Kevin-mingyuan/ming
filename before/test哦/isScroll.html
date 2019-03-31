@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			body {
+				height: 100vh;
+				display: flex;
+				flex-direction: column;
+			}
+
+			header,
+			footer {
+				height: 60px;
+				background: red;
+				text-align: center;
+				line-height: 60px;
+			}
+
+			section {
+				flex: 1;
+				overflow: hidden;
+			}
+
+			#foot {
+				display: flex;
+			}
+
+			#foot span {
+				width: 33.3%;
+			}
+
+			ul li {
+				height: 90px;
+				border-bottom: 1px solid blue;
+			}
+
+			nav {
+				overflow: hidden;
+			}
+
+			nav ul {
+				width: 1300px;
+				border-bottom: #87CEEB;
+
+			}
+
+			nav ul li {
+				width: 200px;
+				float: left;
+			}
+		</style>
+		<script>
+			window.PointerEvent = void 0
+		</script>
+	</head>
+	<body>
+		<header>首页</header>
+		<nav>
+			<ul>
+				<li>aaa</li>
+				<li>111</li>
+				<li>111</li>
+				<li>111</li>
+				<li>111</li>
+				<li>bbb</li>
+			</ul>
+		</nav>
+		<section>
+			<ul id="ul2">
+				<!-- <li>aaa</li>
+				<li>111</li>
+				<li>111</li>
+				<li>111</li>
+				<li>111</li>
+				<li>111</li>
+				<li>111</li>
+				<li>111</li>
+				<li>111</li>
+				<li>111</li>
+				<li>111</li>
+				<li>bbb</li> -->
+			</ul>
+		</section>
+		<header id="foot">
+			<span>主页</span>
+			<span>主页2</span>
+			<span>主页3</span>
+		</header>
+	</body>
+	<script src="iscroll.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+	<script type="text/javascript">
+		var myScroll = new IScroll('section', {
+			scrollY: true,
+			click: true,
+		});
+		var myScroll2 = new IScroll('nav', {
+			scrollX: true,
+			click: true,
+
+		})
+		// 'http://jx.xuzhixiang.top/ap/api/productlist.php'
+
+		$.ajax({
+			url:'http://jx.xuzhixiang.top/ap/api/productlist.php',
+			type:'get',
+			dataType:'json',
+			success:function(data){
+				console.log(data);
+				data.data.map(function(item,i){
+					$('#ul2').append(`<li>${item.pname}</li>`)
+				});
+				myScroll.refresh(); 
+				<!--每次 dom结构改变后重新加载滚动条 -->
+			}
+		});
+		
+		$('#foot').click(function(){
+			console.log(myScroll.y);
+		})
+		$(document).on('touchend',function(){ 
+			if(myScroll.y>50){
+				console.log('下拉刷新')
+			};
+			if(myScroll.y < myScroll.maxScrollY - 50){
+				console.log('上拉加载')
+			}
+		})
+	</script>
+</html>

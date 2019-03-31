@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style>
+			.box1 {
+				height: 200px;
+				width: 600px;
+				margin: 0 auto;
+				background: skyblue;
+			}
+
+			#eee {
+				display: block;
+				height: 100px;
+				width: 333px;
+				color: red;
+				/* background-color:red; */
+				background: blueviolet;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box1">
+			<a id="eee" href="http://www.baidu.com" target="_blank">百度默认事件</a>
+		</div>
+	</body>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+	<script>
+		// 11111111111111111111111111111111111111
+		//不阻止事件冒泡和默认事件
+		// 			$(".box1").click(function(){
+		// 				console.log("1")//不阻止事件冒泡会打印1，页面跳转;				
+		// 			});
+// 22222222222222222222222222222222222222
+		//阻止冒泡
+// 					$(".box1 a").click(function(event){
+// 						event.stopPropagation();//不会打印1，但是页面会跳转；			
+// 		 
+// 					});
+// 					
+// 					$(".box1").click(function(){
+// 						console.log("1")				
+// 					});
+		// 33333333333333333333333333333333
+// 		$(".box1 a").click(function(event){			
+// 			//阻止默认事件
+// 			event.preventDefault();//页面不会跳转，但是会打印出1，
+// 			});
+// 						
+// 			$(".box1").click(function(){
+// 			console.log("1");	
+// 		});
+	// 44444444444444444444444444444444444444
+// 		$(".box1").click(function(){
+// 			console.log("1")
+// 		});			
+// 		//阻止冒泡//阻止默认事件
+// 		$(".box1 a").click(function(event){
+// 			event.stopPropagation();			
+// 			//阻止默认事件
+// 			event.preventDefault() //页面不会跳转，也不会打印出1
+// 		})
+// 55555555555555555555555555555555555555555
+		$(".box1").click(function(event){
+				console.log("1");
+			});									
+		$(".box1 a").click(function(event){
+			// console.log('1');
+			return false;  
+//页面不会跳转，也不会打印出1，等于同时调用了event.stopPropagation()和event.preventDefault()
+		});
+
+
+	</script>
+
+</html>

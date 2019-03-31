@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+	</head>
+	<body>
+		<input type="text" id="user" placeholder="xiamuliu"/>
+		<input type="text"  id="paw" value=""  placeholder="12347890" />
+		<input type="button" name="" id="btn" value="dianji" />
+	</body>
+	<script src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/cookie.js">
+	</script>
+	<script type="text/javascript">
+		$(function(){
+// 			$.post('http://47.104.244.134:8080/usersave.do',{
+// 						username:'xiamuliu',
+// 						password:'12347890',
+// 						email:'1401389531@qq.com',
+// 						sex:"男"
+// 				},function(data){
+// 					console.log(data);
+// 				});
+			$("#btn").click(function(){
+				$.post('http://47.104.244.134:8080/userlogin.do',{
+						name:$("#user").val(),
+						password:$("#paw").val()
+				},function (data) {
+					console.log(data);
+						var obj = {};
+						console.log($("#user").val())
+						obj.name = $("#user").val();
+						obj.token = data.data.token;
+						obj = JSON.stringify(obj);
+						setCookie("username",obj,7);
+						
+						location.href = 'prodlist.html';
+				}); 
+			})
+			 
+		})
+	</script>
+</html>
