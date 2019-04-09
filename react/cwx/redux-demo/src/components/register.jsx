@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import {Link} from 'react-router-dom';
 
-class C extends Component{
+class Register extends Component{
 
     render(){
 
@@ -10,7 +10,7 @@ class C extends Component{
 
             <div>
             
-                <h2>I'm c</h2>
+                <h2>I'm register</h2>
 
                 <Link to='/'>go a</Link>
             </div>
@@ -18,4 +18,4 @@ class C extends Component{
     }
 }
 
-export default C;
+export default Register;

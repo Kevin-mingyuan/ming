@@ -4,9 +4,9 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 
 import AA from './components/a.jsx';
 
-import BB from './components/b.jsx';
+import Login from './components/login.jsx';
 
-import CC from './components/c.jsx';
+import Register from './components/register.jsx';
 
 import Info from './components/info.jsx'
 
@@ -21,9 +21,9 @@ class App extends Component {
                     
                     <Route ref='aa' exact path='/' component={AA} />
 
-                    <Route path='/login' component={BB} />
+                    <Route path='/login' component={Login} />
 
-                    <Route path='/register' component={CC} />
+                    <Route path='/register' component={Register} />
 
                     <Route path='/info' component={Info} />
 

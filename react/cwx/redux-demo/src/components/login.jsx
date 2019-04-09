@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import {Link} from 'react-router-dom';
 
-class B extends Component{
+class Login extends Component{
 
     constructor(props){
 
@@ -48,4 +48,4 @@ class B extends Component{
     }
 }
 
-export default B;
+export default Login;
