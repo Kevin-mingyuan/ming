@@ -1,7 +1,6 @@
 var path = require("path");
 
 module.exports = {
-    
     entry:{　　//入口文件
         "app":path.join(__dirname,"../index.js")  //app对应生成的文件名   当前的路径 
     },

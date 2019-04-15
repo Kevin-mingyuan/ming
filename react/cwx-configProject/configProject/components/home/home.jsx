@@ -1,5 +1,5 @@
 import React from 'react';
-// import Hello from "../components/hello.jsx"; //引入hello组件
+import HomeChild from "./homeChild.jsx"; //引入hello组件
 
  class Home extends React.Component{
     constructor(props){
@@ -13,7 +13,9 @@ import React from 'react';
         return (
             <div className="index_container">
                     hello home
-                    {/* <Hello text="world" /> */}
+
+                <HomeChild  />
+
             </div>
         )
     }
